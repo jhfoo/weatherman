@@ -2,6 +2,7 @@ const assert = require('assert'),
     restify = require('restify'),
     Router = require('restify-router').Router,
     router = new Router(),
+    CorsMiddleware = require('restify-cors-middleware'),
     socketio = require('socket.io'),
     Config = require('./ConfigReader')('../../config'),
     log4js = require('log4js').configure(Config.log4js),
@@ -14,6 +15,10 @@ const logger = log4js.getLogger();
 const server = restify.createServer();
 const io = socketio.listen(server.server);
 
+const cors = CorsMiddleware({
+    origins:['*']
+});
+
 // router.add('/', require('./plugin-default'));
 // router.applyRoutes(server);
 require('./plugin-default').applyRoutes(server);
@@ -23,6 +28,8 @@ server.use(restify.plugins.bodyParser());
 server.use(restify.plugins.queryParser({
     mapParams: false
 }));
+server.use(cors.preflight);
+server.use(cors.actual);
 
 // start REST service
 server.listen(Config.service.port, () => {
