@@ -1,0 +1,31 @@
+{
+  "name": "weatherman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "supervisor -n exit src/server/server.js",
+    "client": "node src/client/client.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhfoo/weatherman.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhfoo/weatherman/issues"
+  },
+  "homepage": "https://github.com/jhfoo/weatherman#readme",
+  "dependencies": {
+    "log4js": "^3.0.6",
+    "restify": "^7.3.0",
+    "restify-router": "^0.5.1",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  }
+}

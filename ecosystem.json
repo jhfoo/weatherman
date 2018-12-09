@@ -1,0 +1,26 @@
+{
+    "apps": [{
+        "name": "weatherman",
+        "script": "src/server/server.js",
+        "env_production": {
+            "NODE_ENV": "production"
+        }
+    }],
+    "deploy": {
+        "production": {
+            "user": "jhfoo",
+            "host": ["hansel.kungfoo.info"],
+            "ref": "origin/master",
+            "repo": "https://github.com/jhfoo/weatherman.git",
+            "path": "/usr/local/www/weatherman",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "pre-setup": "",
+            "post-setup": "",
+            "pre-deploy-local": "pm2 stop ecosystem.json",
+            "post-deploy": "npm install && pm2 startOrRestart ecosystem.json --env production",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    }
+}

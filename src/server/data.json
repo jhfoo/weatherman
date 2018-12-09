@@ -1,0 +1,12 @@
+{
+    "devices": {
+        "ESP8266:13584883": {
+            "data": 2,
+            "core": "esptoy"
+        },
+        "ESP8266:12594514": {
+            "data": 1,
+            "core": "esptoy-prod"
+        }
+    }
+}
