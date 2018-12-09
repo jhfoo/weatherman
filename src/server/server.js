@@ -14,8 +14,9 @@ const logger = log4js.getLogger();
 const server = restify.createServer();
 const io = socketio.listen(server.server);
 
-// router.add('/esp8266', require('./plugins/esp8266'));
-router.applyRoutes(server);
+// router.add('/', require('./plugin-default'));
+// router.applyRoutes(server);
+require('./plugin-default').applyRoutes(server);
 
 // config REST service
 server.use(restify.plugins.bodyParser());
