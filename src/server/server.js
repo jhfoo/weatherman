@@ -6,7 +6,8 @@ const assert = require('assert'),
     socketio = require('socket.io'),
     Config = require('./ConfigReader')('../../config'),
     log4js = require('log4js').configure(Config.log4js),
-    store = require('./ReadingStore');
+    ReadingStore = require('./ReadingStore'),
+    store = ReadingStore.getSingleton();
 
 // primary init: setup logger
 const logger = log4js.getLogger();
@@ -44,8 +45,9 @@ io.sockets.on('connection', (socket) => {
         try {
             assert(data.DeviceId);
             assert(data.DeviceType);
-            assert(data.temp);
+            assert(data.TempC);
             assert(data.humidity);
+            assert(data.DateTime);
             store.saveReading(data.DeviceId + ':' + data.DeviceType, data);
         } catch (err) {
             logger.error(err);

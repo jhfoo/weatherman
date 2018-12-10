@@ -3,7 +3,8 @@ const assert = require('assert'),
     router = new Router(),
     log4js = require('log4js'),
     logger = log4js.getLogger(),
-    Config = require('./ConfigReader')('../../config');
+    Config = require('./ConfigReader')('../../config'),
+    store = require('./ReadingStore').getSingleton();
 
 router.get('/getReadings', (req, res, next) => {
     logger.debug('Handling /getReadings');
@@ -12,13 +13,7 @@ router.get('/getReadings', (req, res, next) => {
 
         res.send({
             status: 'OK',
-            data: [{
-                id: 'abcdef',
-                name: '',
-                TempC: '12.0',
-                humidity: '30.0',
-                DateTime: Math.floor((new Date).getTime() / 1000)
-            }],
+            data: store.getAllReadings(),
         });
         return next();
     } catch (err) {
